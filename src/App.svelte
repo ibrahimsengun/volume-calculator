@@ -3,7 +3,7 @@
   let height = 0;
 
   function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 </script>
 
@@ -56,7 +56,7 @@
       <div class="col-2" />
       <div class="col-12  mt-3">
         <p id="volume">
-          Hacim: {numberWithCommas((Math.PI * (radius * radius) * height).toFixed(3))}
+          Hacim: {numberWithCommas((Math.PI * (radius * radius) * height).toFixed(2))}
         </p>
       </div>
     </div>
