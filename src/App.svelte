@@ -21,16 +21,16 @@
   ];
 
   function changeSelectElement() {
-    if ((unitHeight.id != "not_selected" && unitHeight.id != undefined) 
-        && (unitRadius.id != "not_selected" && unitRadius.id != undefined)) {
+    if (unitHeight.id != "not_selected" && unitHeight.id != undefined &&
+      (unitRadius.id != "not_selected" && unitRadius.id != undefined)
+    ) {
+      let r = unitConvert(radius, unitRadius.id, unitHeight.id);
+      volume1 = (Math.PI * (r * r) * height).toFixed(2);
+      unitVolume1 = unitHeight;
 
-        let r = unitConvert(radius, unitRadius.id, unitHeight.id)
-        volume1 = (Math.PI * (r * r) * height).toFixed(2);
-        unitVolume1 = unitHeight;
-
-        let h = unitConvert(height, unitHeight.id, unitRadius.id)
-        volume2 = (Math.PI * (radius * radius) * h).toFixed(2);
-        unitVolume2 = unitRadius;
+      let h = unitConvert(height, unitHeight.id, unitRadius.id);
+      volume2 = (Math.PI * (radius * radius) * h).toFixed(2);
+      unitVolume2 = unitRadius;
     }
   }
 
@@ -160,7 +160,7 @@
     <div class="row">
       <div class="col-12 mb-3">
         <h1 class="mb-3">Silindir Hacim Hesaplayıcı</h1>
-        <img src="images/cylinder-volume-formula.png" alt="cylinder"/>
+        <img src="images/cylinder-volume-formula.png" alt="cylinder" />
       </div>
       <div class="col-6">
         <div class="input-group mb-3">
@@ -217,8 +217,24 @@
         </div>
       </div>
       <div class="col-12 mt-3">
-        <h1>Hacim 1: {numberWithCommas(volume1)} {unitVolume1.text == undefined ? "br": unitVolume1.text}<sup>3</sup> </h1>
-        <h1>Hacim 2: {numberWithCommas(volume2)} {unitVolume2.text == undefined ? "br": unitVolume2.text}<sup>3</sup> </h1>
+        <div class="card">
+          <div class="card-body">
+            <h3>
+              Hacim 1: {numberWithCommas(volume1)} {unitVolume1.text == undefined ? 'br' : unitVolume1.text}
+              <sup>3</sup>
+            </h3>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3>
+              Hacim 2: {numberWithCommas(volume2)} {unitVolume2.text == undefined ? 'br' : unitVolume2.text}
+              <sup>3</sup>
+            </h3>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
