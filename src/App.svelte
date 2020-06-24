@@ -21,7 +21,9 @@
   ];
 
   function changeSelectElement() {
-    if (unitHeight.id != "not_selected" && unitHeight.id != undefined &&
+    if (
+      unitHeight.id != "not_selected" &&
+      unitHeight.id != undefined &&
       (unitRadius.id != "not_selected" && unitRadius.id != undefined)
     ) {
       let r = unitConvert(radius, unitRadius.id, unitHeight.id);
@@ -156,7 +158,7 @@
 </script>
 
 <main>
-  <div class="container text-center">
+  <div class="container text-center mt-3">
     <div class="row">
       <div class="col-12 mb-3">
         <h1 class="mb-3">Silindir Hacim Hesaplayıcı</h1>
@@ -165,7 +167,11 @@
       <div class="col-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="radius-label">Yarıçap (r)</span>
+            <span
+              class="input-group-text bg-primary text-white"
+              id="radius-label">
+              Yarıçap (r)
+            </span>
           </div>
           <input
             type="number"
@@ -175,7 +181,11 @@
             on:change={changeSelectElement} />
 
           <div class="input-group-prepend">
-            <span class="input-group-text" id="radius-unit">Birim</span>
+            <span
+              class="input-group-text bg-primary text-white"
+              id="radius-unit">
+              Birim
+            </span>
           </div>
           <select
             class="custom-select"
@@ -191,7 +201,9 @@
       <div class="col-6">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="height-label">
+            <span
+              class="input-group-text bg-primary text-white"
+              id="height-label">
               Yükseklik (h)
             </span>
           </div>
@@ -203,7 +215,11 @@
             on:change={changeSelectElement} />
 
           <div class="input-group-prepend">
-            <span class="input-group-text" id="height-unit">Birim</span>
+            <span
+              class="input-group-text bg-primary text-white"
+              id="height-unit">
+              Birim
+            </span>
           </div>
           <select
             class="custom-select"
@@ -217,22 +233,18 @@
         </div>
       </div>
       <div class="col-12 mt-3">
-        <div class="card">
-          <div class="card-body">
-            <h3>
-              Hacim 1: {numberWithCommas(volume1)} {unitVolume1.text == undefined ? 'br' : unitVolume1.text}
-              <sup>3</sup>
-            </h3>
-          </div>
+        <div class="alert alert-primary">
+          <h3>
+            <span class="badge">Hacim 1:</span>{numberWithCommas(volume1)}<span class="badge">{unitVolume1.text == undefined ? 'br' : unitVolume1.text}</span>
+            <sup class="badge badge-primary">3</sup>
+          </h3>
         </div>
 
-        <div class="card">
-          <div class="card-body">
-            <h3>
-              Hacim 2: {numberWithCommas(volume2)} {unitVolume2.text == undefined ? 'br' : unitVolume2.text}
-              <sup>3</sup>
-            </h3>
-          </div>
+        <div class="alert alert-primary">
+          <h3>
+            <span class="badge">Hacim 2:</span>{numberWithCommas(volume2)}<span class="badge">{unitVolume2.text == undefined ? 'br' : unitVolume2.text}</span>
+            <sup class="badge badge-primary">3</sup>
+          </h3>
         </div>
 
       </div>
