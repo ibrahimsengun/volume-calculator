@@ -1,38 +1,89 @@
 <script>
   let radius = 0;
   let height = 0;
-  let volume1 = 0;
-  let volume2 = 0;
+  let volume = 0;
 
   let unitRadius = "";
   let unitHeight = "";
-  let unitVolume1 = "";
-  let unitVolume2 = "";
+  let unitVolume = "";
 
   let units = [
     { id: "not_selected", text: "Seçiniz." },
-    { id: "mil", text: "Mil" },
     { id: "yard", text: "Yard" },
     { id: "feet", text: "Fit" },
-    { id: "inch", text: "İnc" },
-    { id: "kilometer", text: "Kilometre" },
     { id: "meter", text: "Metre" },
     { id: "centimeter", text: "Santimetre" }
   ];
 
-  function changeSelectElement() {
-    if (
-      unitHeight.id != "not_selected" &&
-      unitHeight.id != undefined &&
-      (unitRadius.id != "not_selected" && unitRadius.id != undefined)
-    ) {
-      let r = unitConvert(radius, unitRadius.id, unitHeight.id);
-      volume1 = (Math.PI * (r * r) * height).toFixed(2);
-      unitVolume1 = unitHeight;
+  let vUnits = [
+    { id: "not_selected", text: "Seçiniz." },
+    { id: "liter", text: "Litre" },
+    { id: "abdgal", text: "ABD Galon" },
+    { id: "enggal", text: "İngiltere Galon" },
+    { id: "metercub", text: "Metreküp" },
+    { id: "mililiter", text: "Mililitre" },
+  ];
 
-      let h = unitConvert(height, unitHeight.id, unitRadius.id);
-      volume2 = (Math.PI * (radius * radius) * h).toFixed(2);
-      unitVolume2 = unitRadius;
+  function changeSelectElement() {
+    if ((unitHeight.id != "not_selected" && unitHeight.id != undefined) &&
+      (unitRadius.id != "not_selected" && unitRadius.id != undefined) &&
+      (unitVolume.id != "not_selected" && unitVolume.id != undefined))
+    {
+      let r = unitConvert(radius, unitRadius.id, unitHeight.id);
+      let v = (Math.PI * (r * r) * height).toFixed(2);
+      volume = vUnitConvert(v, unitHeight.id, unitVolume.id).toFixed(2);
+    }
+  }
+
+  function vUnitConvert(num, unit1, unit2) {
+    if (unit1 == "meter") {
+      if (unit2 == "metercub") {
+        return num;
+      } else if (unit2 == "abdgal") {
+        return num * 264.172052;
+      } else if (unit2 == "enggal") {
+        return num * 219.97;
+      } else if (unit2 == "liter") {
+        return num / 0.001;
+      } else if (unit2 == "mililiter") {
+        return num / 0.000001;
+      }
+    } else if (unit1 == "centimeter") {
+      if (unit2 == "metercub") {
+        return num / 1000000;
+      } else if (unit2 == "abdgal") {
+        return num * 0.00026417;
+      } else if (unit2 == "enggal") {
+        return num * 0.00021997;
+      } else if (unit2 == "liter") {
+        return num / 1000;
+      } else if (unit2 == "mililiter") {
+        return num;
+      }
+    } else if (unit1 == "yard") {
+      if (unit2 == "metercub") {
+        return num / 1.3080;
+      } else if (unit2 == "abdgal") {
+        return num * 201.97;
+      } else if (unit2 == "enggal") {
+        return num * 168.18;
+      } else if (unit2 == "liter") {
+        return num / 0.0013080;
+      } else if (unit2 == "mililiter") {
+        return num / 0.0000013080;
+      }
+    } else if (unit1 == "feet") {
+      if (unit2 == "metercub") {
+        return num / 35.315;
+      } else if (unit2 == "abdgal") {
+        return num * 7.4805;
+      } else if (unit2 == "enggal") {
+        return num * 6.2288;
+      } else if (unit2 == "liter") {
+        return num / 0.035315;
+      } else if (unit2 == "mililiter") {
+        return num / 0.000035315;
+      }
     }
   }
 
@@ -40,115 +91,45 @@
     if (unit1 == "meter") {
       if (unit2 == "meter") {
         return num;
-      } else if (unit2 == "mil") {
-        return num * 0.00062137;
       } else if (unit2 == "yard") {
         return num * 1.0936;
       } else if (unit2 == "feet") {
         return num * 3.2808;
-      } else if (unit2 == "inch") {
-        return num * 39.37;
-      } else if (unit2 == "kilometer") {
-        return num / 1000;
       } else if (unit2 == "centimeter") {
         return num / 0.01;
-      }
-    } else if (unit1 == "kilometer") {
-      if (unit2 == "kilometer") {
-        return num;
-      } else if (unit2 == "mil") {
-        return num * 0.62137;
-      } else if (unit2 == "yard") {
-        return num * 1093.6;
-      } else if (unit2 == "feet") {
-        return num * 3280.8;
-      } else if (unit2 == "inch") {
-        return num * 39370;
-      } else if (unit2 == "meter") {
-        return num * 1000;
-      } else if (unit2 == "centimeter") {
-        return num * 100000;
       }
     } else if (unit1 == "centimeter") {
       if (unit2 == "centimeter") {
         return num;
-      } else if (unit2 == "mil") {
-        return num * 0.0000062137;
-      } else if (unit2 == "yard") {
+      }else if (unit2 == "yard") {
         return num * 0.010936;
       } else if (unit2 == "feet") {
         return num * 0.032808;
-      } else if (unit2 == "inch") {
-        return num * 0.3937;
       } else if (unit2 == "meter") {
         return num / 100;
-      } else if (unit2 == "kilometer") {
-        return num / 100000;
-      }
-    } else if (unit1 == "mil") {
-      if (unit2 == "mil") {
-        return num;
-      } else if (unit2 == "centimeter") {
-        return num / 0.0000062137;
-      } else if (unit2 == "yard") {
-        return num * 1760;
-      } else if (unit2 == "feet") {
-        return num * 5280;
-      } else if (unit2 == "inch") {
-        return num * 63360;
-      } else if (unit2 == "meter") {
-        return num / 0.00062137;
-      } else if (unit2 == "kilometer") {
-        return num / 0.62137;
-      }
+      } 
     } else if (unit1 == "yard") {
       if (unit2 == "yard") {
         return num;
       } else if (unit2 == "centimeter") {
         return num / 0.010936;
-      } else if (unit2 == "mil") {
-        return num * 0.00056818;
       } else if (unit2 == "feet") {
         return num * 3;
-      } else if (unit2 == "inch") {
-        return num * 36;
       } else if (unit2 == "meter") {
         return num / 1.0936;
-      } else if (unit2 == "kilometer") {
-        return num / 1093.6;
-      }
-    } else if (unit1 == "inch") {
-      if (unit2 == "inch") {
-        return num;
-      } else if (unit2 == "centimeter") {
-        return num / 0.3937;
-      } else if (unit2 == "mil") {
-        return num * 0.000015783;
-      } else if (unit2 == "feet") {
-        return num * 0.083333;
-      } else if (unit2 == "yard") {
-        return num * 0.027778;
-      } else if (unit2 == "meter") {
-        return num / 39.37;
-      } else if (unit2 == "kilometer") {
-        return num / 39370;
-      }
+      } 
     } else if (unit1 == "feet") {
       if (unit2 == "feet") {
         return num;
       } else if (unit2 == "centimeter") {
         return num / 0.032808;
-      } else if (unit2 == "mil") {
-        return num * 0.00018939;
       } else if (unit2 == "inch") {
         return num * 12;
       } else if (unit2 == "yard") {
         return num * 0.33333;
       } else if (unit2 == "meter") {
         return num / 3.2808;
-      } else if (unit2 == "kilometer") {
-        return num / 3280.8;
-      }
+      } 
     }
   }
 
@@ -175,11 +156,12 @@
           </div>
           <input
             type="number"
-            class="form-control mr-3"
+            class="form-control"
             aria-describedby="radius-label"
             bind:value={radius}
             on:change={changeSelectElement} />
-
+        </div>
+        <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span
               class="input-group-text bg-primary text-white"
@@ -209,11 +191,12 @@
           </div>
           <input
             type="number"
-            class="form-control mr-3"
+            class="form-control"
             aria-describedby="height-label"
             bind:value={height}
             on:change={changeSelectElement} />
-
+        </div>
+        <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span
               class="input-group-text bg-primary text-white"
@@ -235,18 +218,27 @@
       <div class="col-12 mt-3">
         <div class="alert alert-primary">
           <h3>
-            <span class="badge">Hacim 1:</span>{numberWithCommas(volume1)}<span class="badge">{unitVolume1.text == undefined ? 'br' : unitVolume1.text}</span>
-            <sup class="badge badge-primary">3</sup>
+            <span class="badge">Hacim 1:</span>{numberWithCommas(volume)}<span class="badge">{unitVolume.text == undefined ? 'br' : unitVolume.text}</span>
           </h3>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span
+                class="input-group-text bg-primary text-white"
+                id="volume-unit">
+                Birim
+              </span>
+            </div>
+            <select
+              class="custom-select"
+              aria-describedby="volume-unit"
+              bind:value={unitVolume}
+              on:change={changeSelectElement}>
+              {#each vUnits as unit}
+                <option value={unit}>{unit.text}</option>
+              {/each}
+            </select>
+          </div>
         </div>
-
-        <div class="alert alert-primary">
-          <h3>
-            <span class="badge">Hacim 2:</span>{numberWithCommas(volume2)}<span class="badge">{unitVolume2.text == undefined ? 'br' : unitVolume2.text}</span>
-            <sup class="badge badge-primary">3</sup>
-          </h3>
-        </div>
-
       </div>
     </div>
   </div>
